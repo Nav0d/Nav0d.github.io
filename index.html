@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nav0d PC Repair</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #0d0f12;
+    color: white;
+}
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    padding-top: 30px;
+}
+h1 {
+    text-align: center;
+    color: #00ffae;
+    font-size: 28px;
+}
+.box {
+    background: #14171c;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid #2b2f36;
+}
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: none;
+    background: #1d2026;
+    color: white;
+}
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #00ffae;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+button:hover {
+    background: #00d890;
+}
+.small {
+    font-size: 13px;
+    color: #b8b8b8;
+    margin-top: 10px;
+}
+.contact-info {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+</style>
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Nav0d PC Repair</h1>
+
+    <div class="box">
+        <h3>Υπηρεσίες</h3>
+        <p>• Καθάρισμα PC (10€)</p>
+        <p>• Format Windows (10–15€)</p>
+        <p>• Αλλαγή SSD (10€)</p>
+        <p>• Διάγνωση hardware (5€)</p>
+    </div>
+
+    <div class="box">
+        <h3>Κλείσε Ραντεβού</h3>
+
+        <form id="contact-form">
+            <label>Όνομα</label>
+            <input type="text" name="user_name" required />
+
+            <label>Email</label>
+            <input type="email" name="user_email" required />
+
+            <label>Μήνυμα</label>
+            <textarea name="message" rows="4" required></textarea>
+
+            <button type="submit">Αποστολή</button>
+        </form>
+
+        <p id="status" class="small"></p>
+    </div>
+
+    <div class="box contact-info">
+        <h3>Επικοινωνία</h3>
+        <p>📞 Τηλέφωνο: <b>+30 XXX XXX XXXX</b></p>
+        <p>📧 Email: <b>youremail@example.com</b></p>
+        <p>📷 Instagram: <b>@your_pcfix_instagram</b></p>
+        <p>💻 GitHub: <a href="https://github.com/Nav0d" target="_blank" style="color:#00ffae;">github.com/Nav0d</a></p>
+    </div>
+</div>
+
+<!-- EmailJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+// Init EmailJS
+(function() {
+    emailjs.init("YOUR_PUBLIC_KEY"); // <-- ΒΑΛΕ εδώ το PUBLIC KEY σου
+})();
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+        .then(() => {
+            document.getElementById("status").textContent = "Το μήνυμα στάλθηκε με επιτυχία! ✔";
+            this.reset();
+        }, (err) => {
+            document.getElementById("status").textContent = "Σφάλμα στην αποστολή. ❌";
+        });
+});
+</script>
+
+</body>
+</html>
