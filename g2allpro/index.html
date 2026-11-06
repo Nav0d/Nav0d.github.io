@@ -1,326 +1,436 @@
-<html manifest="Cache.manifest">
+
+<!DOCTYPE html>
+<html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PS4 System Dashboard</title>
+
 <style>
-    html, body{
-margin:auto;
-font-family:sans-serif;
-font-size:20px;
-font-weight:lighter;
-text-align: center;
-color:#FFFFFF;
-background-size:cover;
-overflow: hidden;
-}
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
- .content {
-  width:90%;
-  height:15%;
-  margin-left:3.5%;
-  background:rgba(0,0,0,0.5);
-  color:white;
-  margin-top:0%;
-  font-size:25px;
-  text-align:center;
-  border-radius:30px;
-  padding:20px;
-  line-height:12px;
-  position:absolute;bottom:0px;
- }
- .title {
-  font-size:40px;
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-weight:bolder;
-  margin-bottom:10px;
- }
- .yellow {
-  color:yellow;
- }
- .hue {
-  color:yellow;
-  padding:10px;
-  border-radius:10px;
-  animation:hue 5s linear infinite;
-  -webkit-animation: hue 5s linear infinite;
-  box-shadow: 0px 0px 50px yellow;
-  color:white;
-  background:rgba(255,255,0,0.4);
- }
- .hue:hover{
-  color:yellow;
-  background:transparent;
- }
- @keyframes hue{
- 0%{
- filter:hue-rotate(0deg);
- -webkit-filter:hue-rotate(0deg);
- }
- 10%{
- box-shadow: 0px 1px 50px yellow;
- }
- 20%{
- box-shadow: 1px 1px 50px yellow;
- }
- 30%{
- box-shadow: 1px 0px 50px yellow;
- }
- 40%{
-  box-shadow: 1px -1px 50px yellow;
- }
- 50%{
- box-shadow: 0px -1px 50px yellow;
- }
- 60%{
- box-shadow: -1px -1px 50px yellow;
- }
- 70%{
- box-shadow: -1px 0px 50px yellow;
- }
- 80%{
- box-shadow: -1px 1px 50px yellow;
- }
- 90%{
- box-shadow: 0px 1px 50px yellow;
- }
- 100%{
- filter:hue-rotate(360deg);
- -webkit-filter:hue-rotate(360deg);
- }
- }
- .text {
-  padding-bottom:50px;
- }
-  .back {
-   font-size:25px;
-   margin-top:10px;
-   display:block;
-   line-height:55px;
-   width:20%;
-   text-decoration:none;
-   height:50px;
-   background:white;
-   color:black;
-   border-radius:15px;
-  }
-  .back:hover{
-   border:2px solid white;
-   background:transparent;
-   box-sizing:border-box;
-   color:white;
-  }
- #psip {
-  text-align: center;
-  margin-left: 38%;
-  margin-right: auto;
-  width:15%;
-  display:flex;
-  position: absolute;
-  
-  background: rgba(0, 0, 0, 0.500);
-  border-radius: 2em;
-  border: none;
-  padding: 0.8em;
-  
-  color: #ffffff;
-  padding-left: 1.5em;
-  
-  outline: none;
-  box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px hsl(0, 0%, 2%);
-  backdrop-filter: blur(5px);
-}
-/* Modal Content */
-.modal-content {
-  font-family: BFARNAZ;
-  font-size: 18px;
-  position: relative;
-  background-color: #dddddd;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s
-}
-button {
-            background:rgba(0,0,0,0.5);
-			box-shadow: 0 5px 20px 0 white;
-            border: 2px solid black;
-            border-radius: 10px;
-            width: 200px;
-            height: 43px;            
-            text-align: center;
-}
-button:hover {
-            box-shadow: 0 5px 50px 0 white;
-            color: white;
-            border-radius: 10px;
-			background-color: #0F0F53;
+:root {
+    --bg: #080b13;
+    --panel: #101725;
+    --panel2: #151f30;
+    --border: #263449;
+    --text: #e8eef8;
+    --muted: #8190a5;
+    --blue: #55aaff;
+    --green: #45d69a;
+    --yellow: #f5c451;
+    --red: #ff6474;
 }
 
-hr {
-padding:0;
-margin:0;
-opacity:0.7;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 50% -20%, #19345a 0%, transparent 55%),
+        var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    padding: 35px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1050px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #278cff, #6558ee);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 0 30px #278cff40;
+}
+
+.brand h1 {
+    font-size: 21px;
+    margin: 0;
+}
+
+.brand p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.status-badge {
+    background: #182d27;
+    border: 1px solid #285b46;
+    color: var(--green);
+    padding: 9px 13px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+.hero {
+    background: linear-gradient(120deg, #14243b, #101725);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 27px;
+    margin-bottom: 20px;
+}
+
+.hero-label {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero h2 {
+    font-size: 26px;
+    margin: 12px 0 8px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.6;
 }
 
 #progress {
- font-weight:bold;
- text-shadow: 4px 4px 4px black;
-
- font-size:17px;
-}
-.pointer {cursor: pointer;}
-
-h1 {
-text-shadow: 0.1em 0.1em 0.2em black;
-font-size: 25px;
-text-align: center;
-color: white;
+    margin-top: 22px;
+    padding: 13px 15px;
+    background: #080e19;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--blue);
 }
 
-.TextCaption{
-display: block;
-    font-size: 20px;
-    color: #fff;
-    text-decoration: none;
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-a img {
-    display: inline-block;  text-decoration: none;
+.info-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 19px;
+    border-radius: 14px;
 }
 
-a {
-    display: inline-block;  text-decoration: none;
+.info-card span {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
-a:hover img, a:hover .TextCaption{
-transform: scale(1.1)
+.info-card h3 {
+    font-size: 19px;
+    margin: 10px 0 0;
 }
 
-    </style>
-<meta charset="utf-8">
-<title>Karo Host Auto Exploit GoldHen PS4 5.05 & 7.XX - 13.52 FW</title>
-<script>
-      if (window.applicationCache.status === 0) {window.location.replace("cache.html");}
-</script>
+.console {
+    background: #080d16;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+}
+
+.console-title {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.console-title small {
+    color: var(--muted);
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 7px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+button:hover {
+    border-color: var(--blue);
+    background: #1c2b42;
+}
+
+#logs {
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.log-line {
+    display: flex;
+    gap: 10px;
+    line-height: 1.8;
+    border-bottom: 1px solid #ffffff08;
+    padding: 3px 0;
+    overflow-wrap: anywhere;
+}
+
+.log-time {
+    color: #65758c;
+    flex-shrink: 0;
+}
+
+.log-info { color: var(--blue); }
+.log-success { color: var(--green); }
+.log-warning { color: var(--yellow); }
+.log-error { color: var(--red); }
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 90px 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    body { padding: 20px 12px; }
+    header { align-items: flex-start; }
+    .brand h1 { font-size: 17px; }
+    .hero h2 { font-size: 21px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .console-header { align-items: flex-start; flex-direction: column; }
+    #logs { height: 260px; }
+}
+</style>
 </head>
-<body style='background-color:#1A1920'>
-<br>
-<h1 style='text-shadow: 4px 4px 4px black;font-size:30px;text-align:center;text-shadow: 4px 4px 4px black;color:yellow;'>Karo Host Auto Exploit GoldHen PS4 5.05 & 7.XX - 13.52 FW</h1>
-<h1 id=progress style='font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:white;'>Jailbreaking....</h1><br>
 
-<div id=all class="content" >
- 	    <div class="text" >
- 	        <br><span style="text-shadow: 4px 4px 4px black;" class="yellow" >Designed, Compiled by :</span >&nbsp;&nbsp; <span style="text-shadow: 4px 4px 4px black;" class="hue" >Karo Sharifi</span>
- 	        <br><br><br><br><span style="text-shadow: 4px 4px 4px black;" class="yellow" >Super Special Thanks To :</span >&nbsp;&nbsp; <a style="font-size:30px;text-align:center;text-shadow: 4px 4px 4px black;color:white;">Sleirsgoevy , Al Azif , ChendoChap , SiSTRo ,Abc ,Xalfia, Specter ,Znullptr ... </a>
-	    </div>
+<body>
+<div class="container">
+
+    <header>
+        <div class="brand">
+            <div class="logo">P</div>
+            <div>
+                <h1>PS4 System Dashboard</h1>
+                <p>System information & diagnostics</p>
+            </div>
+        </div>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            INITIALIZING
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-label">SYSTEM CONSOLE</div>
+        <h2>Welcome back.</h2>
+        <p>Monitor system status and view diagnostic messages in real time.</p>
+
+        <div id="progress">Waiting for system information...</div>
+    </section>
+
+    <section class="info-grid">
+        <div class="info-card">
+            <span>PLATFORM</span>
+            <h3 id="platform">Detecting...</h3>
+        </div>
+
+        <div class="info-card">
+            <span>FIRMWARE</span>
+            <h3 id="firmware">Unknown</h3>
+        </div>
+    </section>
+
+    <section class="console">
+        <div class="console-header">
+            <div class="console-title">
+                LIVE LOGS
+                <small id="log-count">0 entries</small>
+            </div>
+
+            <div class="actions">
+                <button id="copy-btn">COPY LOGS</button>
+                <button id="clear-btn">CLEAR</button>
+            </div>
+        </div>
+
+        <div id="logs" aria-live="polite">
+            <div class="empty">No log messages yet.</div>
+        </div>
+    </section>
+
+    <footer>
+        SYSTEM DASHBOARD · DIAGNOSTICS INTERFACE
+    </footer>
+
 </div>
-</body>
+
 <script>
 var outputConsole = document.getElementById("progress");
-window.log = function (msg, color) {
-      if (color === undefined) color = "#cccccc";
-      outputConsole.innerHTML = '<span style="color:' + color + '">' + msg + '</span><br>';
-};
-window.logger = function (msg, color) {
-      if (color === undefined) color = "#cccccc";
-      outputConsole.innerHTML = '<span style="color:' + color + '">' + msg + '</span><br>';
-};
-window.addEventListener('error', function (event) {
-      var reason = event.error;
-      var msg = 'Unhandled error\n';
-      if (reason) {
-        msg += reason + '\n';
-        if (reason.sourceURL)
-          msg += reason.sourceURL;
-        if (reason.line)
-          msg += ':' + reason.line;
-        if (reason.column)
-          msg += ':' + reason.column;
-        if (reason.stack)
-          msg += '\n' + reason.stack;
-      } else {
-        msg += 'No error object';
-      }
-      alert(msg);
-      return true;
-});
-var uaFull = navigator.userAgent;
-var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
-var isPS4 = match !== null;
-var fwVersion = isPS4 ? match[1] : "Unknown";
-var fwNum = parseFloat(fwVersion);
+var logContainer = document.getElementById("logs");
+var logCount = document.getElementById("log-count");
+var entries = [];
 
-function onScriptError() {
-    progress.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+function updateCount() {
+    logCount.textContent = entries.length + " entries";
 }
 
-if (!isPS4) {
-    document.addEventListener("DOMContentLoaded", () => {
-        progress.innerHTML = "Only for PS4 with Firmware 5.05 and 7.00 to 13.52";
-    });
-} else {
-        if (fwNum == 5.05 || fwNum == 5.07) {
-            var script = document.createElement('script');
-            script.src = "exploit5.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 7.00 && fwNum <= 9.60) {
-            var script = document.createElement('script');
-            script.src = "exploit7_9.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-             setTimeout(function() { window.log("Reloading...");try {
-                 doJailBreak();
-                } catch (error) {
-                 window.log("An error occured during exploit: " + error, "red");
-                 }; }, 500);
-             
-        }
-        else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            var script = document.createElement('script');script.src = "exploit10.js";script.onerror = onScriptError;
-            script.onload = function () {
-                setTimeout(function () {
-                    doJb();
-                }, 1000);
-            };
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 11.50 && fwNum <= 12.02) {
-           var script = document.createElement('script');
-           script.src = "1150_1202.js";
-           script.onerror = onScriptError;
-           document.head.appendChild(script);
-       }
-       else if (fwNum >= 12.50 && fwNum <= 13.00) {
-           var script = document.createElement('script');
-           script.src = "1250_13.js";
-           script.onerror = onScriptError;
-           document.head.appendChild(script);
-       }
-       else if (fwNum >= 13.02 && fwNum <= 13.52) {
-           var script = document.createElement('script');
-           script.src = "1302_1352.js";
-           script.onerror = onScriptError;
-           document.head.appendChild(script);
-       }
+function addLog(message, level) {
+    level = (level || "info").toLowerCase();
+
+    if (["info", "success", "warning", "error"].indexOf(level) === -1) {
+        level = "info";
     }
+
+    var now = new Date();
+    var time = now.toLocaleTimeString();
+
+    var entry = {
+        time: time,
+        level: level.toUpperCase(),
+        message: String(message)
+    };
+
+    entries.push(entry);
+
+    if (entries.length === 1) {
+        logContainer.innerHTML = "";
+    }
+
+    var line = document.createElement("div");
+    line.className = "log-line";
+
+    var timestamp = document.createElement("span");
+    timestamp.className = "log-time";
+    timestamp.textContent = "[" + time + "]";
+
+    var label = document.createElement("span");
+    label.className = "log-" + level;
+    label.textContent = "[" + level.toUpperCase() + "]";
+
+    var text = document.createElement("span");
+    text.textContent = String(message);
+
+    line.appendChild(timestamp);
+    line.appendChild(label);
+    line.appendChild(text);
+
+    logContainer.appendChild(line);
+    logContainer.scrollTop = logContainer.scrollHeight;
+
+    updateCount();
+}
+
+window.log = function(message, color) {
+    var level = "info";
+
+    if (color === "red" || color === "#ff6474") {
+        level = "error";
+    } else if (color === "green" || color === "#45d69a") {
+        level = "success";
+    } else if (color === "yellow" || color === "#f5c451") {
+        level = "warning";
+    }
+
+    addLog(message, level);
+    outputConsole.textContent = String(message);
+};
+
+window.logger = function(message, color) {
+    window.log(message, color);
+};
+
+window.addEventListener("error", function(event) {
+    var reason = event.error;
+    var message = "Unhandled error: " + (reason || event.message || "Unknown error");
+
+    if (event.filename) {
+        message += " | " + event.filename + ":" + event.lineno;
+    }
+
+    addLog(message, "error");
+});
+
+document.getElementById("clear-btn").onclick = function() {
+    entries = [];
+    logContainer.innerHTML = '<div class="empty">No log messages yet.</div>';
+    updateCount();
+};
+
+document.getElementById("copy-btn").onclick = function() {
+    var output = entries.map(function(entry) {
+        return "[" + entry.time + "] [" + entry.level + "] " + entry.message;
+    }).join("\n");
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(output);
+    } else {
+        addLog("Clipboard API is unavailable in this browser.", "warning");
+    }
+};
+
+window.setSystemInfo = function(platform, firmware) {
+    document.getElementById("platform").textContent = platform;
+    document.getElementById("firmware").textContent = firmware;
+};
+
+addLog("Dashboard initialized.", "success");
+addLog("Waiting for system information.", "info");
 </script>
+</body>
 </html>
